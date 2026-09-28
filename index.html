@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Varchev Finance, AI асистент, демо</title>
+<meta name="theme-color" content="#020308">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020308;--navy:#141633;--c1:#0c0d18;--c2:#101121;--ink:#EEF1FA;--ink2:rgba(238,241,250,.66);--line:rgba(255,255,255,.12);--red:#990000;--red2:#c31111;--gold:#E6B35A;--gold2:#f2c46d;--green:#25b36a;--green2:#5bffbf;--d:'Roboto Condensed','Inter',sans-serif;--t:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:radial-gradient(ellipse at 50% -10%,var(--navy),#05060f 45%,var(--bg));background-color:var(--bg);color:var(--ink);font:16px/1.6 var(--t);-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3,p{margin:0}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+.wrap{width:min(1160px,100% - 48px);margin-inline:auto}
+.ic{width:1.1em;height:1.1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav{position:fixed;z-index:50;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(1100px,100% - 24px);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 8px 8px 18px;border-radius:14px;background:rgba(2,3,8,.6);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.nav.s{background:rgba(2,3,8,.94)}
+.nav img{height:26px;width:auto}
+.nl{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nl a{display:block;padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--ink2)}
+.nl a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nb{font:700 13px var(--d);letter-spacing:.06em;text-transform:uppercase;background:var(--red);color:#fff;padding:10px 16px;border-radius:8px;white-space:nowrap}
+@media(max-width:820px){.nl{display:none}}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:calc(130px + env(safe-area-inset-top,0px)) 0 0}
+.hv{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;opacity:.32}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,3,8,.55),var(--bg) 96%)}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:7px 15px 7px 11px;border-radius:999px;border:1px solid rgba(230,179,90,.4);background:rgba(230,179,90,.07);font-size:13px;font-weight:600;color:var(--gold2)}
+.live{width:7px;height:7px;border-radius:50%;background:var(--green2);box-shadow:0 0 0 4px rgba(91,255,191,.2);animation:pulse 2.2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+h1{font:700 clamp(32px,4.7vw,60px)/1.06 var(--d);letter-spacing:.005em;max-width:15em;margin-top:22px}
+h1 em{font-style:normal;color:var(--gold)}
+.lead{color:var(--ink2);font-size:17px;max-width:56ch;margin-top:20px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:8px;font:700 15px var(--d);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:0}
+.b1{background:linear-gradient(180deg,var(--red2),var(--red));color:#fff}
+.b2{border:1px solid var(--gold);color:var(--gold2);background:transparent}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:54px 0 0;padding-bottom:50px}
+@media(max-width:820px){.metrics{grid-template-columns:1fr 1fr}}
+.m{padding:18px 20px;border-radius:14px;background:rgba(12,13,24,.82);border:1px solid var(--line)}
+.m b{display:block;font:700 clamp(28px,3.4vw,40px)/1 var(--d);color:var(--gold2)}
+.m span{display:block;margin-top:8px;font-size:13px;color:var(--ink2);line-height:1.4}
+.mq{border-block:1px solid var(--line);overflow:hidden;padding:15px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;animation:sc 46s linear infinite}
+.track ul{display:flex;list-style:none;margin:0;padding:0}
+.track li{display:flex;align-items:center;gap:10px;padding-right:32px;white-space:nowrap;font:600 15px var(--d);letter-spacing:.04em;color:var(--ink2)}
+.track li i{font-style:normal;color:var(--green2);font-size:12px}
+.track li i.r{color:#ff6b6b}
+@keyframes sc{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.track,.live,.typing i{animation:none}.lc,.bub{transition:none;animation:none;opacity:1;transform:none}}
+.sec{padding:clamp(60px,9vw,110px) 0}
+.h2{font:700 clamp(26px,3.4vw,42px)/1.12 var(--d);max-width:18em}
+.sl{color:var(--ink2);font-size:17px;max-width:54ch;margin-top:14px}
+.dg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);grid-template-areas:"h c" "l c";column-gap:clamp(28px,6vw,72px);row-gap:28px;align-items:start}
+.dh{grid-area:h;align-self:end}.dc{grid-area:c;width:100%}
+@media(max-width:959px){.dg{grid-template-columns:1fr;grid-template-areas:"h" "c" "l"}.dc,.lc{max-width:480px}}
+.chat{background:var(--c1);border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 80px -36px #000;display:flex;flex-direction:column}
+.ct{display:flex;align-items:center;gap:12px;padding:13px 16px;background:linear-gradient(135deg,#2a0508,#0c0d18);border-bottom:1px solid var(--line)}
+.av{width:36px;height:36px;border-radius:50%;background:var(--c2);border:1.4px solid var(--gold);display:grid;place-items:center;color:var(--gold2)}
+.ct .n{font-weight:700;font-size:15px}.ct .s{font-size:12px;opacity:.75}
+.on{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--green2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green2);box-shadow:0 0 0 3px rgba(91,255,191,.2)}
+.cb{height:380px;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;background:var(--c2);scrollbar-width:none}
+.cb::-webkit-scrollbar{display:none}
+.bub{max-width:86%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.5;opacity:0;transform:translateY(6px);animation:rise .35s ease forwards;white-space:pre-line}
+@keyframes rise{to{opacity:1;transform:none}}
+.bub.v{align-self:flex-end;background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;border-bottom-right-radius:4px;font-weight:500}
+.bub.a{align-self:flex-start;background:var(--c1);border:1px solid var(--line);border-bottom-left-radius:4px}
+.typing{align-self:flex-start;display:flex;gap:4px;padding:13px 15px;background:var(--c1);border:1px solid var(--line);border-radius:14px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#8a93aa;animation:bl 1.1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.opts{display:flex;flex-direction:column;gap:6px;align-self:stretch}
+.opts button{text-align:left;font:500 13.5px var(--t);color:var(--gold2);background:rgba(230,179,90,.07);border:1px solid rgba(230,179,90,.35);border-radius:10px;padding:9px 12px;cursor:pointer}
+.opts button:hover{background:rgba(230,179,90,.16)}
+.cf{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--c1);border-top:1px solid var(--line)}
+.fi{flex:1;min-width:0;padding:10px 14px;border-radius:8px;background:var(--c2);border:1px solid var(--line);color:var(--ink2);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rp{display:none;align-items:center;gap:8px;padding:9px 14px;border-radius:8px;border:1px solid var(--gold);background:transparent;color:var(--gold2);font:600 13px var(--t);cursor:pointer}
+.lc{grid-area:l;width:100%;max-width:380px;opacity:0;transform:translateY(24px);transition:opacity .5s,transform .8s cubic-bezier(.2,1.2,.3,1)}
+.lc.sh{opacity:1;transform:none}
+.lcard{background:linear-gradient(180deg,#16182f,#0a0b16);border:1px solid rgba(230,179,90,.4);border-radius:16px;overflow:hidden}
+.lh{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line);font-size:12.5px;font-weight:600;color:var(--ink2)}
+.lh b{color:var(--gold2)}
+.lr{display:flex;justify-content:space-between;gap:16px;padding:9px 18px;font-size:13.5px;font-weight:600;border-bottom:1px dashed var(--line)}
+.lr span:first-child{color:var(--ink2);font-weight:500}
+.ls{display:flex;justify-content:space-between;padding:11px 18px;background:rgba(37,179,106,.13);color:var(--green2);font-size:13px;font-weight:700}
+.st{padding:clamp(56px,8vw,96px) 0;background:var(--c1);border-block:1px solid var(--line)}
+.sg{display:grid;grid-template-columns:auto 1fr;gap:clamp(22px,4vw,44px);align-items:center}
+@media(max-width:700px){.sg{grid-template-columns:1fr}}
+.oval{width:120px;height:120px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;background:#05060f}
+.oval img{width:70%}
+.st p{font:500 clamp(20px,2.6vw,32px)/1.3 var(--d);max-width:28em}
+.st p em{font-style:normal;color:var(--gold2)}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:44px}
+.tile{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:16px;background:var(--c1);border:1px solid var(--line)}
+.tile h3{font:700 clamp(18px,1.8vw,22px) var(--d);letter-spacing:.01em}
+.tile p{font-size:15px;line-height:1.55;color:var(--ink2)}
+.tile img.im{width:100%;height:170px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#05060f}
+.ta{grid-column:span 7}.tb{grid-column:span 5}.tc,.td,.te{grid-column:span 4}
+.tb{background:linear-gradient(160deg,#2a0508,#12060a);border-color:rgba(195,17,17,.5)}
+@media(max-width:900px){.ta,.tb,.te{grid-column:span 12}.tc,.td{grid-column:span 6}}
+@media(max-width:600px){.tc,.td{grid-column:span 12}}
+.qr{display:flex;gap:14px;flex-wrap:wrap}
+.qr div{text-align:center;font-size:12px;color:var(--ink2)}
+.qr img{width:92px;height:92px;background:#fff;padding:5px;border-radius:8px;margin-bottom:6px}
+.big{font:700 52px/1 var(--d);color:var(--green2)}
+.how{background:var(--c1);border-block:1px solid var(--line)}
+.qs{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.q{padding:9px 16px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-size:14px;color:var(--ink2)}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:44px 0 0;padding:0;list-style:none}
+.steps::before{content:"";position:absolute;left:21px;right:21px;top:21px;height:2px;background:linear-gradient(90deg,var(--gold),var(--line) 92%)}
+.node{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--c1);border:2px solid var(--gold);font:700 15px var(--d);color:var(--gold2)}
+.step:last-child .node{background:var(--gold);color:#1a1305}
+.step h3{font:700 19px var(--d);margin:18px 0 6px}
+.step p{color:var(--ink2);font-size:15px;line-height:1.5;max-width:28ch}
+@media(max-width:820px){.steps{grid-template-columns:1fr}.steps::before{left:21px;right:auto;top:22px;bottom:44px;width:2px;height:auto}.step{display:grid;grid-template-columns:44px 1fr;column-gap:18px;padding-bottom:26px}.step .node{grid-row:1/span 2}.step h3{margin:6px 0 4px}.step p{max-width:none}}
+.foot{position:relative;isolation:isolate;overflow:hidden;text-align:center;padding:clamp(72px,10vw,130px) 0 calc(120px + env(safe-area-inset-bottom,0px))}
+.foot::before{content:"";position:absolute;z-index:-1;left:-10%;right:-10%;bottom:-45%;height:85%;background:radial-gradient(ellipse at 50% 100%,rgba(153,0,0,.4),transparent 65%)}
+.foot h2{font:700 clamp(26px,4vw,46px)/1.12 var(--d);max-width:18em;margin-inline:auto}
+.foot .sl{margin-inline:auto}
+.ca{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px}
+.dis{margin:40px auto 0;max-width:70ch;font-size:12.5px;line-height:1.6;color:var(--ink2);opacity:.8}
+.fl{position:fixed;z-index:60;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:flex-end;gap:12px;max-width:calc(100% - 28px)}
+.fp{width:min(380px,100vw - 28px);display:none}
+.fp.open{display:flex}
+.fp .cb{height:min(360px,48vh)}
+.fb{width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(195,17,17,.7),0 0 0 2px rgba(230,179,90,.5)}
+.fb .ic{width:26px;height:26px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-9"/><path d="M15 7h5v5"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-replay" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<nav class="nav" id="nav">
+  <a href="#top" aria-label="Varchev Finance"><img src="https://www.varchev.com/trade-now/varchev-finance-logo.png" alt="Varchev Finance"></a>
+  <ul class="nl"><li><a href="#demo">AI асистент</a></li><li><a href="#work">Условия</a></li><li><a href="#how">Как започвам</a></li></ul>
+  <a class="nb" href="https://hackera.online" target="_blank" rel="noopener">Демо от Hackera</a>
+</nav>
+
+<header class="hero" id="top">
+  <video class="hv" src="https://www.varchev.com/trade-now/varchev-hero-bg.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+  <div class="wrap">
+    <span class="pill"><span class="live"></span>Лицензиран брокер, КФН, MiFID, ESMA</span>
+    <h1>Единственият лицензиран брокер в Европа, носещ <em>името на основателя си</em> като ангажимент към клиента.</h1>
+    <p class="lead">Над 22 години Лицензиран Финансов Брокер Varchev Finance. Изпилени до минимум трейдинг условия. Live Support от Про Дилъри и Трейдъри.</p>
+    <div class="cta"><a class="btn b1" href="#demo">Говорете с AI асистента <svg class="ic"><use href="#i-arrow"/></svg></a><a class="btn b2" href="#work">Търговски условия</a></div>
+    <div class="metrics">
+      <div class="m"><b>22+</b><span>години опит с европейски лицензи (КФН, MiFID, ESMA)</span></div>
+      <div class="m"><b>0</b><span>комисиона за всички инструменти в MT5</span></div>
+      <div class="m"><b>12 ms</b><span>средна скорост на изпълнение на ордери (STP / DMA)</span></div>
+      <div class="m"><b>+%</b><span>Лихва върху свободните средства и Фракционни акции</span></div>
+    </div>
+  </div>
+  <div class="mq" aria-hidden="true"><div class="track">
+    <ul><li>Forex <span>EUR/USD</span><i>▲</i></li><li>Forex <span>GBP/USD</span><i class="r">▼</i></li><li>Индекси <span>US500</span><i>▲</i></li><li><span>NAS100</span><i>▲</i></li><li><span>DE40</span><i class="r">▼</i></li><li>Акции <span>Apple</span><i>▲</i></li><li><span>Nvidia</span><i>▲</i></li><li><span>Tesla</span><i class="r">▼</i></li><li>Стоки <span>Gold</span><i>▲</i></li><li><span>Silver</span><i>▲</i></li><li><span>Crude Oil</span><i class="r">▼</i></li><li>Крипто <span>BTC</span><i>▲</i></li><li><span>ETH</span><i>▲</i></li></ul>
+    <ul><li>Forex <span>EUR/USD</span><i>▲</i></li><li>Forex <span>GBP/USD</span><i class="r">▼</i></li><li>Индекси <span>US500</span><i>▲</i></li><li><span>NAS100</span><i>▲</i></li><li><span>DE40</span><i class="r">▼</i></li><li>Акции <span>Apple</span><i>▲</i></li><li><span>Nvidia</span><i>▲</i></li><li><span>Tesla</span><i class="r">▼</i></li><li>Стоки <span>Gold</span><i>▲</i></li><li><span>Silver</span><i>▲</i></li><li><span>Crude Oil</span><i class="r">▼</i></li><li>Крипто <span>BTC</span><i>▲</i></li><li><span>ETH</span><i>▲</i></li></ul>
+  </div></div>
+</header>
+
+<main>
+<section class="sec" id="demo">
+  <div class="wrap dg">
+    <div class="dh"><h2 class="h2">Клиентът пита, асистентът води до сметка</h2><p class="sl">Примерен разговор за отваряне на сметка, условия и платформи. В долния десен ъгъл е и живият уиджет, опитайте с бутоните.</p></div>
+    <div class="dc" id="chatBox"><div class="chat">
+      <div class="ct"><div class="av"><svg class="ic"><use href="#i-chart"/></svg></div><div><div class="n">AI асистент на Varchev Finance</div><div class="s">varchev.com</div></div><div class="on"><span class="dot"></span>онлайн</div></div>
+      <div class="cb" id="cb" role="log" aria-live="polite" aria-label="Демо разговор"></div>
+      <div class="cf"><div class="fi" aria-hidden="true">Напишете съобщение…</div><button class="rp" id="rp" type="button"><svg class="ic"><use href="#i-replay"/></svg>Пусни отново</button></div>
+    </div></div>
+    <div class="lc" id="lc"><div class="lcard">
+      <div class="lh"><b>Нов потенциален клиент</b><span>сега</span></div>
+      <div class="lr"><span>Интерес</span><span>Реална сметка</span></div>
+      <div class="lr"><span>Платформа</span><span>MetaTrader 5</span></div>
+      <div class="lr"><span>Пазари</span><span>Индекси, Акции</span></div>
+      <div class="lr"><span>Опит</span><span>Начинаещ</span></div>
+      <div class="ls"><span>Следваща стъпка</span><span>Регистрация онлайн</span></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="st"><div class="wrap sg">
+  <div class="oval"><img src="https://www.varchev.com/trade-now/varchev-finance-logo.png" alt="Varchev Finance"></div>
+  <p>Ние сме брокер, който носи <em>името на основателя си</em>. Над 22 години работим с европейски лицензи и с Про Дилъри и Трейдъри на линия. Асистентът ускорява първата стъпка, а хората са зад всяко решение.</p>
+</div></section>
+
+<section class="sec" id="work"><div class="wrap">
+  <h2 class="h2">Какво обяснява асистентът за минути</h2>
+  <p class="sl">Условия, платформи и продукти, така както ги предлага Varchev Finance.</p>
+  <div class="bento">
+    <article class="tile ta"><img class="im" src="https://www.varchev.com/trade-now/mt5Banner.d7239e34.webp" alt="MetaTrader 5" loading="lazy"><h3>MetaTrader 5 с 0 комисиона</h3><p>Forex, индекси, акции, стоки и крипто на една платформа. Изпълнение със средна скорост 12 ms (STP / DMA).</p></article>
+    <article class="tile tb"><h3>Две платформи, един достъп</h3><p>MetaTrader 5 и Varchev Absolute Trader (VAT). Асистентът праща правилния линк за изтегляне.</p><div class="qr"><div><img src="https://www.varchev.com/trade-now/qr-mt5.png" alt="QR код MetaTrader 5" loading="lazy">MetaTrader 5</div><div><img src="https://www.varchev.com/trade-now/qr-vat.png" alt="QR код Varchev Trader" loading="lazy">Varchev Trader</div></div></article>
+    <article class="tile tc"><img class="im" src="https://www.varchev.com/trade-now/fraction-shares.png" alt="Фракционни акции" loading="lazy"><h3>Фракционни акции</h3><p>Apple, Nvidia или Tesla без нужда от цяла акция.</p></article>
+    <article class="tile td"><img class="im" src="https://www.varchev.com/trade-now/interest-rate-percent.png" alt="Лихва върху свободни средства" loading="lazy"><h3>Лихва върху свободните средства</h3><p>Неизползваният баланс работи за клиента.</p></article>
+    <article class="tile te"><img class="im" src="https://www.varchev.com/trade-now/club-iNSIDER-3.png" alt="Club iNSIDER" loading="lazy"><h3>Club iNSIDER</h3><p>Насочва към общността и анализите на брокера.</p></article>
+    <article class="tile ta"><img class="im" src="https://www.varchev.com/new/images/gv3.jpg" alt="Екипът на Varchev" loading="lazy"><h3>Хора зад всеки отговор</h3><p>Когато въпросът е сложен, асистентът предава разговора на Про Дилър от екипа.</p></article>
+    <article class="tile tb"><div class="big">22+</div><h3>години европейско лицензиране</h3><p>КФН, MiFID, ESMA. Прозрачност преди първия депозит.</p></article>
+  </div>
+</div></section>
+
+<section class="sec how" id="how"><div class="wrap">
+  <h2 class="h2">От въпрос до първа сделка</h2>
+  <div class="qs" aria-label="Примерни въпроси"><span class="q">Как да отворя демо сметка?</span><span class="q">Какви са комисионите?</span><span class="q">MT5 или Varchev Trader?</span><span class="q">Как работят фракционните акции?</span></div>
+  <ol class="steps">
+    <li class="step"><div class="node">1</div><h3>Въпрос в чата</h3><p>Клиентът пита на български, денонощно.</p></li>
+    <li class="step"><div class="node">2</div><h3>Насоки</h3><p>Асистентът уточнява цел, пазари и опит.</p></li>
+    <li class="step"><div class="node">3</div><h3>Сметка</h3><p>Демо или реална сметка чрез онлайн регистрация.</p></li>
+    <li class="step"><div class="node">4</div><h3>Търговия</h3><p>MT5 или Varchev Trader, с Live Support.</p></li>
+  </ol>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <h2>Първата стъпка към брокера е един въпрос в чата</h2>
+  <p class="sl">Лицензиран европейски брокер, 22+ години опит, Live Support от Про Дилъри и Трейдъри.</p>
+  <div class="ca"><button class="btn b1" id="cr" type="button"><svg class="ic"><use href="#i-replay"/></svg>Пусни демото отново</button><a class="btn b2" href="https://www.varchev.com" target="_blank" rel="noopener">varchev.com <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+  <p class="dis">Демонстрационна страница, изготвена от Hackera за Varchev Finance. Не е свързана с реалния сайт varchev.com и не е инвестиционен съвет. Търговията с финансови инструменти с ливъридж носи висок риск от загуба на капитал. Преди да търгувате, се запознайте с рисковете.</p>
+</div></footer>
+
+<div class="fl" id="fl">
+  <div class="chat fp open" id="fp">
+    <div class="ct"><div class="av"><svg class="ic"><use href="#i-chart"/></svg></div><div><div class="n">AI асистент</div><div class="s">Varchev Finance</div></div><div class="on"><span class="dot"></span>онлайн</div></div>
+    <div class="cb" id="wb" role="log" aria-live="polite" aria-label="Чат уиджет"></div>
+  </div>
+  <button class="fb" id="fb" type="button" aria-label="Отвори или затвори чата" aria-expanded="true"><svg class="ic"><use href="#i-chat"/></svg></button>
+</div>
+
+<script>
+const WEL='Здравейте! Аз съм AI асистентът на Varchev Finance. С какво мога да Ви помогна днес?';
+const OPTS=['Как да отворя реална или демо сметка?','Условия за търговия, спредове и комисиони.','Платформи (MT5 / Varchev Trader).','Лихва върху свободните средства & Фракционни акции.'];
+const ANS=[
+'Можете да започнете с демо сметка, за да изпробвате платформата без риск, или директно с реална. И при двата случая регистрацията е онлайн, а за реална сметка е нужна верификация. Искате ли да Ви насоча към регистрацията?',
+'В MT5 няма комисиона за нито един инструмент. Спредът зависи от инструмента и пазарните условия, а ордерите се изпълняват със средна скорост 12 ms (STP / DMA). За детайли по конкретен инструмент питайте и ще Ви ги покажа.',
+'Предлагаме MetaTrader 5 (MT5) и Varchev Absolute Trader (VAT). И двете се изтеглят чрез QR код по-долу в страницата. Ако не сте сигурни коя да изберете, кажете какво търгувате и ще препоръчам.',
+'Свободните средства по сметката Ви могат да носят лихва, а с фракционните акции купувате част от акция, например Apple, Nvidia или Tesla, без да е нужна цяла. Желаете ли повече за някоя от двете?'];
+const demo=[
+['v','Здравейте, искам да започна да търгувам, но съм начинаещ.'],
+['a',WEL+'\nРазбирам, че започвате. Какво ще търгувате най често?'],
+['v','Индекси и акции, най вече Nvidia и Apple.'],
+['a','Добър избор. В MT5 няма комисиона за нито един инструмент, а по индекси като US500, NAS100 и DE40 имате достъп до търговия на един екран. За акции можете да ползвате и фракционни акции.'],
+['v','Реална сметка ли да отворя, или първо демо?'],
+['a','Като начинаещ, най разумно е да започнете с демо сметка и да се запознаете с MT5. Регистрацията е онлайн. Когато сте готов, преминавате към реална сметка с верификация.'],
+['v','А имам ли лихва върху свободните пари в сметката?'],
+['a','Да, Varchev Finance предлага лихва върху свободните средства. Точните условия ще видите при регистрацията, а Про Дилър от екипа може да ги обясни допълнително. Да Ви изпратя линк към демо сметката и QR кода за MT5?'],
+['v','Да, моля.'],
+['a','Готово, записах Ви като интерес към демо сметка. Преди да търгувате с реални пари, имайте предвид, че търговията носи риск от загуба на капитал.']];
+function el(c,t){const e=document.createElement('div');e.className=c;if(t)e.textContent=t;return e}
+function bub(b,w,t){b.appendChild(el('bub '+w,t));b.scrollTop=b.scrollHeight}
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* live widget */
+const wb=document.getElementById('wb');
+function wOpts(){const o=el('opts');OPTS.forEach((t,i)=>{const b=document.createElement('button');b.type='button';b.textContent=(i+1)+'. '+t;b.onclick=()=>{o.remove();bub(wb,'v',t);const ty=el('typing');ty.innerHTML='<i></i><i></i><i></i>';wb.appendChild(ty);wb.scrollTop=wb.scrollHeight;setTimeout(()=>{ty.remove();bub(wb,'a',ANS[i]);wOpts()},reduced?0:800)};o.appendChild(b)});wb.appendChild(o);wb.scrollTop=wb.scrollHeight}
+bub(wb,'a',WEL);wOpts();
+const fp=document.getElementById('fp'),fb=document.getElementById('fb');
+fb.onclick=()=>{const o=fp.classList.toggle('open');fb.setAttribute('aria-expanded',o)};
+if(innerWidth<700){fp.classList.remove('open');fb.setAttribute('aria-expanded','false')}
+/* demo conversation */
+let run=false;
+function start(){if(run)return;run=true;const b=document.getElementById('cb'),rp=document.getElementById('rp'),lc=document.getElementById('lc');b.innerHTML='';lc.classList.remove('sh');rp.style.display='none';let i=0;
+function step(){if(i>=demo.length){run=false;rp.style.display='inline-flex';setTimeout(()=>lc.classList.add('sh'),250);return}
+const m=demo[i];if(reduced){bub(b,m[0],m[1]);i++;step();return}
+const t=el('typing');t.innerHTML='<i></i><i></i><i></i>';b.appendChild(t);b.scrollTop=b.scrollHeight;
+setTimeout(()=>{t.remove();bub(b,m[0],m[1]);i++;setTimeout(step,m[0]==='a'?700:450)},m[0]==='a'?850:500)}
+step()}
+document.getElementById('rp').onclick=start;
+document.getElementById('cr').onclick=()=>{document.getElementById('chatBox').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(start,600)};
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){setTimeout(start,500);o.disconnect()}}),{threshold:.4}).observe(document.querySelector('#chatBox .chat'));
+const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>24),{passive:true});
+if(reduced){const v=document.querySelector('.hv');v.removeAttribute('autoplay');v.pause()}
+</script>
+</body>
+</html>
